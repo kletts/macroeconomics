@@ -8,6 +8,10 @@
 #
 
 library(shiny)
+library(ggplot2)
+library(RColorBrewer)
+
+palette <- brewer.pal(8, "Set1")[1]
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -33,16 +37,15 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-
     output$distPlot <- renderPlot({
         # generate bins based on input$bins from ui.R
         x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
-             xlab = 'Waiting time to next eruption (in mins)',
-             main = 'Histogram of waiting times')
+        #bins <- seq(min(x), max(x), length.out = input$bins + 1)
+        ggplot(data.frame(x=x), aes(x=x)) + 
+            geom_histogram(bins=input$bins, fill=palette) +
+            theme_bw() + 
+            labs(title='Histogram of waiting times', 
+                 x="Waiting time to next eruption (in mins)")
     })
 }
 

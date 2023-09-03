@@ -1,9 +1,27 @@
 ---
-title: "serverless shiny with github page"
+title: "Serverless Shiny with Github Page"
+author: Christian Klettner
+date: today
+date-format: "D MMMM YYYY"
 include-in-header: 
   text: |
     <script type="application/javascript" src='enable-threads.js'></script>
 ---
+
+```{r}
+library(tidyverse)
+library(RColorBrewer)
+```
+
+
+Here is some introductory text content.
+
+$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+
+$$
+
+## Calculator
 
 ```{=html}
 <button class="btn btn-success btn-sm" type="button" style="background-color: dodgerblue" id="statusButton">
@@ -131,7 +149,7 @@ include-in-header:
         <i class="fas fa-spinner fa-spin"></i>
         Installing packages...
       `;
-      await webR.installPackages(["shiny", "jsonlite"])
+      await webR.installPackages(["shiny", "jsonlite", "tidyverse", "RColorBrewer"])
 
       document.getElementById('statusButton').innerHTML = `
         <i class="fas fa-spinner fa-spin"></i>
@@ -215,3 +233,13 @@ include-in-header:
 
 </script>
 ```
+
+-----------
+
+```{r}
+data.frame(x=1:8, y=11:18) %>% 
+  ggplot(aes(x=x, y=y, fill=factor(y))) + 
+    geom_col() + 
+    scale_fill_brewer(palette="Set1")
+```
+
