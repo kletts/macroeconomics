@@ -3,6 +3,9 @@ title: "Serverless Shiny with Github Page"
 author: Christian Klettner
 date: today
 date-format: "D MMMM YYYY"
+format:
+  html:
+    html-math-method: mathjax
 include-in-header: 
   text: |
     <script type="application/javascript" src='enable-threads.js'></script>
@@ -18,7 +21,6 @@ Here is some introductory text content.
 
 $$
 x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-
 $$
 
 ## Calculator
