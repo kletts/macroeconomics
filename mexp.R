@@ -31,7 +31,7 @@ cut_midzero <- function(x, length.out=11) {
   labels <- paste(head(labels, -1), tail(labels, -1), sep=" .. ")
   cut(x, breaks=breaks, labels=labels, include.lowest=TRUE)  } 
 
-mexp %>% 
+p1 <- mexp %>% 
   group_by(category, state) %>% 
   mutate(trend.chg = trend/dplyr::lag(trend, 12)-1) %>% 
   ungroup() %>% 
@@ -49,5 +49,9 @@ mexp %>%
   scale_y_discrete(labels= ~str_wrap(.x, width = 20)) + 
   labs(x=NULL, y=NULL, 
        fill="Chg: %pa", 
-       title="Trend Change in Household Expenditure") 
+       title="Trend Change in Household Expenditure", 
+       subtitle=paste("As at:", as.character(max(mexp$time_period)))) 
+
+ggsave("heatmap.png", p1, device="png", scale = 1.5,
+       width=13, height=10, units="cm")
 
