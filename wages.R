@@ -30,12 +30,13 @@ get_fullhpindex <- function() {
     write_rds(data, file) }
   return(data) } 
 
-eco <- c(
-      "FIRMMCRT"=  "CashRate", 
-      "GCPIEITCYP"="Inflation", 
-      "GGDPCVGDPY"="GDPGrowth", 
-      "GLFSURSA"=  "UnempRate", 
-      "GNFAEYP"=   "LabourEarn") 
+eco <- c("FIRMMCRT"=  "CashRate", 
+        "GCPIEITCYP"="Inflation", 
+        "GGDPCVGDPY"="GDPGrowth", 
+        "GLFSURSA"=  "UnempRate", 
+        "GNFAEYP"=   "LabourEarn",
+        "GLFOSVT" = "JobVacancies")
+
 datahp <- get_fullhpindex() %>%
       arrange(period) %>% 
       group_by(period) %>% 

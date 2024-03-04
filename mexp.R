@@ -6,9 +6,6 @@ library(feasts)
 library(readabs)
 library(haven)
 
-
-#
-
 mexp <- readabs::read_api(id="HSI_M",
                           datakey = list(measure=1, 
                                          category=c("50", "45", "40", "35", "30", "25", "20", "15", "10", "TOT"), 
@@ -31,7 +28,7 @@ cut_midzero <- function(x, length.out=11) {
   upper <- seq(0, max(x), length.out= length.out/2)
   breaks <- c(lower[lower!=0], upper[upper!=0]) 
   labels <- round(breaks*100,1)
-  labels <- paste(head(labels, -1), tail(labels, -1), sep="..")
+  labels <- paste(head(labels, -1), tail(labels, -1), sep=" .. ")
   cut(x, breaks=breaks, labels=labels, include.lowest=TRUE)  } 
 
 mexp %>% 
@@ -41,9 +38,9 @@ mexp %>%
   filter(time_period==max(time_period)) %>% 
   mutate(trend.chg.b = cut_midzero(trend.chg)) %>% 
   ggplot(aes(y=category, x=state, fill=trend.chg.b)) + 
-  geom_tile() + 
+  geom_tile(width=0.95, height=0.95) + 
   geom_text(aes(label=scales::percent(trend.chg, accuracy =0.1), 
-                col = abs(trend.chg)> 0.05), 
+                col = abs(trend.chg)> 0.1), 
             size=3, show.legend = FALSE)  + 
   theme_bw() + 
   scale_fill_brewer(palette="PRGn") + 
