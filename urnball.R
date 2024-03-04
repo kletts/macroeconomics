@@ -33,12 +33,16 @@ data <- readrba::read_rba(series_id=names(eco)) %>%
   mutate(decade = calc_decade(period)) %>% 
   filter(decade >= 1970) 
 
-data %>% 
+p1 <- data %>% 
+  drop_na(Inflation) %>%
+  filter(period >= yearquarter("1990 Q1")) %>%
   ggplot(aes(x=log(UnempRate/JobVacancies), y=Inflation))  + 
   geom_point(aes(col=paste0(decade, "s"))) + 
   geom_smooth(data=~filter(., decade>=1990), 
               method="lm", formula="y ~ bs(x, degree=1, knots=c(1))", col="black") + 
-  scale_y_continuous(limits=c(NA, 13)) + 
+  geom_label(data=~filter(.x, period==max(period)), 
+            aes(label=as.character(period), col=paste0(decade, "s")), 
+            hjust="inward", show.legend = FALSE, nudge_x = 0.05) +
   labs(x=expression(log ~ frac(u,v)), 
        y=expression(pi), 
        col="Decade", 
@@ -46,6 +50,7 @@ data %>%
        caption="Regression excludes pre 1990 data") + 
   theme_bw()
 
-
+ggsave("urnball.png", p1, device="png", scale=1.5, 
+       width=10, height=10, units="cm")
 
 

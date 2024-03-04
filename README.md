@@ -16,7 +16,19 @@ Interactive version: [Household Expenditure Heatmap](https://observablehq.com/d/
 
 ![Monthly CPI trends](mcpi.png)
 
+Update script: 
+
 ```r
 source("mcpi.R")
+```
+
+## Vacancies, unemployment and inflation 
+
+![Urnball](urnball.png)
+
+Update script: 
+
+```r
+source("urnball.R")
 ```
 

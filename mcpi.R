@@ -52,11 +52,12 @@ p1 <- mcpi %>%
         legend.position = c(1,0), 
         legend.justification = c(1,0)) + 
   guides(color="none") + 
-  labs(title="CPI by Category",
-       subtitle="Year on Year Change",
-       x=NULL, y=NULL, linetype=NULL)
+  labs(title="CPI by Category", 
+       subtitle=paste("As at:", as.character(max(mcpi$time_period))),
+       y="Year on Year Change",
+       x=NULL, linetype=NULL)
 
 ggsave("mcpi.png", p1, device="png", scale = 1.5,
-       width=13, height=10, units="cm")
+       width=13, height=15, units="cm")
 
 
