@@ -56,7 +56,7 @@ p1 <- mcpi %>%
        subtitle="Year on Year Change",
        x=NULL, y=NULL, linetype=NULL)
 
-ggsave("cpi.png", p1, device="png", scale = 1.5,
+ggsave("mcpi.png", p1, device="png", scale = 1.5,
        width=13, height=10, units="cm")
 
 

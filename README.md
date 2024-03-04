@@ -14,7 +14,7 @@ Interactive version: [Household Expenditure Heatmap](https://observablehq.com/d/
 
 ## Monthly CPI trends
 
-![Monthly CPI trends](cpi.png)
+![Monthly CPI trends](mcpi.png)
 
 ```r
 source("mcpi.R")
